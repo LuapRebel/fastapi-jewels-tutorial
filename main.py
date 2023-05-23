@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pathlib import Path
-from repos import gem_repository
+from db.db import create_db_and_tables
+from repos.gem_repository import select_all_gems, select_gem
 from sqlmodel import create_engine, SQLModel
 import uvicorn
 
@@ -9,18 +10,17 @@ from models.gem_models import *
 
 app = FastAPI()
 
-db_path = f"sqlite:///{Path(__file__).parent}/database.db"
-engine = create_engine(db_path, echo=True)
-
-
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
-
 
 @app.get("/gems")
 def gems():
-    all_gems = gem_repository.select_all_gems()
+    all_gems = select_all_gems()
     return all_gems
+
+
+@app.get("/gems/{id}")
+def gem(id: int):
+    gem = select_gem(id)
+    return {"gem": gem}
 
 
 if __name__ == "__main__":

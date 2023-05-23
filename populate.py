@@ -2,7 +2,7 @@ import random
 from sqlmodel import Session
 from models.gem_models import Gem, GemProperties, GemTypes, GemColor
 
-from main import engine
+from db.db import engine
 
 
 color_multiplier = {"D": 1.8, "E": 1.6, "G": 1.4, "F": 1.2, "H": 1, "I": 0.8}
@@ -57,4 +57,4 @@ def create_gems_db():
         session.commit()
 
 
-# create_gems_db()
+create_gems_db()
