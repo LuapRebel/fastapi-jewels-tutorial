@@ -57,4 +57,4 @@ def create_gems_db():
         session.commit()
 
 
-create_gems_db()
+# create_gems_db()

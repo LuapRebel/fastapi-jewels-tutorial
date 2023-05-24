@@ -2,8 +2,6 @@ from typing import Optional
 from sqlmodel import SQLModel, Field, Relationship
 from enum import Enum as Enum_, IntEnum
 
-from models.user_models import User
-
 
 class Enum(Enum_):
     @classmethod
@@ -50,8 +48,7 @@ class Gem(SQLModel, table=True):
         default=None, foreign_key="gemproperties.id"
     )
     gem_properties: Optional[GemProperties] = Relationship(back_populates="gem")
-    seller_id: Optional[int] = Field(default=None, foreign_key="user.id")
-    seller: Optional[User] = Relationship()
+    # seller_id: Optional[int] = Field(default=None, foreign_key="user.id")
 
 
 class GemPatch(SQLModel):
